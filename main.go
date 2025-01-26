@@ -12,6 +12,7 @@ func main() {
 	config.InitElasticsearch()
 	r.POST("/api/search/documents", controllers.SearchDocuments)
 	r.POST("/api/search/word", controllers.SearchByWord)
-	r.GET("/api/search/all", controllers.GetAllDocuments) // Novo endpoint
+	r.GET("/api/search/all", controllers.GetAllDocuments)  // Novo endpoint
+	r.POST("/api/search/words", controllers.SearchByWords) // Novo endpoint
 	r.Run()
 }

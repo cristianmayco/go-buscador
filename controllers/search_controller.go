@@ -46,3 +46,19 @@ func GetAllDocuments(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, results)
 }
+
+func SearchByWords(c *gin.Context) {
+	var request struct {
+		Words []string `json:"words"`
+	}
+	if err := c.ShouldBindJSON(&request); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	results, err := services.SearchByWords(request.Words)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, results)
+}
